@@ -27,9 +27,10 @@ export function SectionPanel({
   className?: string;
 }) {
   return (
-    <GlassPanel soft className={className}>
+    <GlassPanel soft className={className ?? ""}>
       <h2 className="text-sm font-semibold">{title}</h2>
       <div className="mt-4">{children}</div>
     </GlassPanel>
+
   );
 }
