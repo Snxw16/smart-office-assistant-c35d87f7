@@ -12,18 +12,18 @@ export function PageHeader({
   action?: ReactNode;
 }) {
   return (
-    <div className="flex flex-wrap items-start justify-between gap-4">
-      <div>
+    <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4 sm:flex sm:flex-wrap sm:justify-between">
+      <div className="min-w-0">
         {eyebrow ? (
-          <div className="text-[11px] font-semibold tracking-[0.18em] text-foreground/40 uppercase">
+          <div className="text-[10px] font-bold tracking-[0.16em] text-foreground/45 uppercase">
             {eyebrow}
           </div>
         ) : null}
-        <h1 className="mt-2 font-display text-3xl font-medium tracking-tight text-balance sm:text-4xl">
+        <h1 className="mt-1.5 font-display text-3xl font-medium text-balance sm:text-[2.125rem]">
           {title}
         </h1>
         {description ? (
-          <p className="mt-2 max-w-[52ch] text-[15px] leading-relaxed text-foreground/55">
+          <p className="mt-2 max-w-[58ch] text-sm leading-relaxed text-foreground/55">
             {description}
           </p>
         ) : null}

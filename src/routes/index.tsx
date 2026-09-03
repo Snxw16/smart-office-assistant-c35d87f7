@@ -20,6 +20,8 @@ export const Route = createFileRoute("/")({
         content:
           "Your intelligent workspace for meetings, research and everyday productivity.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: DashboardPage,
@@ -34,11 +36,11 @@ function DashboardPage() {
         description="Your intelligent workspace for meetings, research and everyday productivity."
       />
 
-      <h2 className="mt-8 text-sm font-semibold text-foreground/70">
+      <h2 className="mt-7 text-base font-bold text-foreground">
         What would you like to do?
       </h2>
 
-      <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-3 grid gap-4 md:grid-cols-3">
         <CapabilityCard
           to="/meeting-assistant"
           icon={ScrollText}
@@ -62,15 +64,15 @@ function DashboardPage() {
           title="AI Chat"
           description="Chat with your AI assistant, ask questions, brainstorm and analyze information."
           cta="Start Chat"
-          className="sm:col-span-2 lg:col-span-1"
         />
       </div>
 
-      <SectionPanel title="Recent Activity" className="mt-4 sm:p-6">
+      <SectionPanel title="Recent Activity" className="mt-5 sm:p-5">
         <EmptyState
           icon={Sparkles}
           title="No recent activity yet"
           description="Your meeting summaries, research threads and conversations will appear here as you work."
+          className="py-7"
         />
       </SectionPanel>
     </section>

@@ -25,6 +25,8 @@ export const Route = createFileRoute("/research-assistant")({
         content:
           "Explore topics, analyze information and organize research with reliable sources.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ResearchAssistantPage,

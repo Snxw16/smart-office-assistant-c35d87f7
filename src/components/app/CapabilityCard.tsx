@@ -44,19 +44,19 @@ export function CapabilityCard({
     <Link
       to={to}
       className={cn(
-        "glass-panel group rounded-[20px] p-5 transition-colors hover:bg-glass/75",
+        "glass-panel group flex min-h-52 flex-col rounded-[16px] p-5 shadow-sm transition-[background-color,border-color,box-shadow,transform] duration-200 hover:-translate-y-0.5 hover:bg-glass/80 hover:shadow-md",
         styles.border,
         className,
       )}
     >
-      <div className={cn("grid size-11 place-items-center rounded-[14px]", styles.icon)}>
-        <Icon className="size-5" />
+      <div className={cn("grid size-10 place-items-center rounded-[10px]", styles.icon)}>
+        <Icon className="size-[18px]" strokeWidth={1.8} />
       </div>
-      <h3 className="mt-4 text-[15px] font-semibold">{title}</h3>
-      <p className="mt-1 text-sm leading-relaxed text-foreground/55">{description}</p>
+      <h3 className="mt-4 text-[15px] font-bold">{title}</h3>
+      <p className="mt-1.5 text-[13px] leading-relaxed text-foreground/55">{description}</p>
       <span
         className={cn(
-          "mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors",
+          "mt-auto inline-flex items-center gap-1.5 pt-4 text-[13px] font-bold text-foreground transition-colors",
           styles.cta,
         )}
       >
