@@ -11,7 +11,7 @@ export function GlassPanel({
   soft?: boolean;
 }) {
   return (
-    <div className={cn(soft ? "glass-soft" : "glass-panel", "rounded-[20px] p-5", className)}>
+    <div className={cn(soft ? "glass-soft" : "glass-panel", "rounded-[16px] p-5 shadow-sm", className)}>
       {children}
     </div>
   );

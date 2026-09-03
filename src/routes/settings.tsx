@@ -25,6 +25,8 @@ export const Route = createFileRoute("/settings")({
         content:
           "Manage your profile, AI preferences, notifications, appearance and security.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: SettingsPage,

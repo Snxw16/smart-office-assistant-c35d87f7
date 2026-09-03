@@ -21,6 +21,8 @@ export const Route = createFileRoute("/meeting-assistant")({
         content:
           "Turn meeting notes and transcripts into clear summaries, decisions and actionable tasks.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: MeetingAssistantPage,

@@ -58,11 +58,11 @@
 }
 
 :root {
-  --radius: 0.875rem;
+  --radius: 0.75rem;
   --font-body: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Newsreader", Georgia, serif;
 
-  --background: oklch(0.95 0.015 275);
+  --background: oklch(0.965 0.01 275);
   --foreground: oklch(0.31 0.048 293);
   --glass: oklch(1 0 0);
   --coral: oklch(0.79 0.088 38);
@@ -143,26 +143,26 @@
   }
 }
 
-/* App canvas: soft pastel gradient field */
+/* App canvas: restrained pastel field */
 @utility app-canvas {
   background-image: linear-gradient(
     to bottom right,
-    color-mix(in oklab, var(--sky) 22%, white),
-    color-mix(in oklab, var(--plum) 16%, white),
-    color-mix(in oklab, var(--mint) 18%, white)
+    color-mix(in oklab, var(--sky) 10%, white),
+    color-mix(in oklab, var(--plum) 8%, white),
+    color-mix(in oklab, var(--mint) 9%, white)
   );
 }
 
 @utility glass-panel {
-  background-color: color-mix(in oklab, var(--glass) 55%, transparent);
-  border: 1px solid color-mix(in oklab, var(--glass) 70%, transparent);
-  backdrop-filter: blur(24px) saturate(140%);
+  background-color: color-mix(in oklab, var(--glass) 62%, transparent);
+  border: 1px solid color-mix(in oklab, var(--glass) 82%, var(--border));
+  backdrop-filter: blur(14px) saturate(115%);
 }
 
 @utility glass-soft {
-  background-color: color-mix(in oklab, var(--glass) 45%, transparent);
-  border: 1px solid color-mix(in oklab, var(--glass) 70%, transparent);
-  backdrop-filter: blur(24px) saturate(140%);
+  background-color: color-mix(in oklab, var(--glass) 48%, transparent);
+  border: 1px solid color-mix(in oklab, var(--glass) 78%, var(--border));
+  backdrop-filter: blur(12px) saturate(110%);
 }
 
 @utility field {

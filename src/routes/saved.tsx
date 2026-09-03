@@ -22,6 +22,8 @@ export const Route = createFileRoute("/saved")({
         property: "og:description",
         content: "Access your saved meetings, research and conversations in one place.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: SavedPage,

@@ -26,6 +26,8 @@ export const Route = createFileRoute("/chat")({
         content:
           "Ask questions, brainstorm ideas, analyze information or get help with your work.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: ChatPage,
