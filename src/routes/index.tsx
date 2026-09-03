@@ -1,24 +1,78 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { MessageSquare, ScrollText, Sparkles, Telescope } from "lucide-react";
+import { CapabilityCard } from "@/components/app/CapabilityCard";
+import { EmptyState } from "@/components/app/EmptyState";
+import { PageHeader } from "@/components/app/PageHeader";
+import { SectionPanel } from "@/components/app/GlassPanel";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "Dashboard — Smart Office Assistant" },
+      {
+        name: "description",
+        content:
+          "Your intelligent workspace for meetings, research and everyday productivity.",
+      },
+      { property: "og:title", content: "Dashboard — Smart Office Assistant" },
+      {
+        property: "og:description",
+        content:
+          "Your intelligent workspace for meetings, research and everyday productivity.",
+      },
+    ],
+  }),
+  component: DashboardPage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function DashboardPage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+    <section>
+      <PageHeader
+        eyebrow="Dashboard"
+        title="Welcome to Smart Office Assistant"
+        description="Your intelligent workspace for meetings, research and everyday productivity."
       />
-    </div>
+
+      <h2 className="mt-8 text-sm font-semibold text-foreground/70">
+        What would you like to do?
+      </h2>
+
+      <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <CapabilityCard
+          to="/meeting-assistant"
+          icon={ScrollText}
+          tone="coral"
+          title="Meeting Assistant"
+          description="Summarize meetings, extract decisions and identify action items."
+          cta="Start Meeting"
+        />
+        <CapabilityCard
+          to="/research-assistant"
+          icon={Telescope}
+          tone="mint"
+          title="Research Assistant"
+          description="Research topics, compare information and organize findings with sources."
+          cta="Start Research"
+        />
+        <CapabilityCard
+          to="/chat"
+          icon={MessageSquare}
+          tone="sky"
+          title="AI Chat"
+          description="Chat with your AI assistant, ask questions, brainstorm and analyze information."
+          cta="Start Chat"
+          className="sm:col-span-2 lg:col-span-1"
+        />
+      </div>
+
+      <SectionPanel title="Recent Activity" className="mt-4 sm:p-6">
+        <EmptyState
+          icon={Sparkles}
+          title="No recent activity yet"
+          description="Your meeting summaries, research threads and conversations will appear here as you work."
+        />
+      </SectionPanel>
+    </section>
   );
 }
