@@ -9,7 +9,7 @@ import { SearchField } from "@/components/ui/field-controls";
 
 const filters = ["All", "Meetings", "Research", "Conversations"] as const;
 
-export const Route = createFileRoute("/saved")({
+export const Route = createFileRoute("/_authenticated/saved")({
   head: () => ({
     meta: [
       { title: "Saved — Smart Office Assistant" },

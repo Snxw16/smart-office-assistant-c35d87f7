@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/field-controls";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/settings")({
+export const Route = createFileRoute("/_authenticated/settings")({
   head: () => ({
     meta: [
       { title: "Settings — Smart Office Assistant" },

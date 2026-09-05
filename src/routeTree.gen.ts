@@ -9,73 +9,101 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as ChatRouteImport } from './routes/chat'
-import { Route as MeetingAssistantRouteImport } from './routes/meeting-assistant'
-import { Route as ResearchAssistantRouteImport } from './routes/research-assistant'
-import { Route as SavedRouteImport } from './routes/saved'
-import { Route as SettingsRouteImport } from './routes/settings'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedChatRouteImport } from './routes/_authenticated/chat'
+import { Route as AuthenticatedMeetingAssistantRouteImport } from './routes/_authenticated/meeting-assistant'
+import { Route as AuthenticatedResearchAssistantRouteImport } from './routes/_authenticated/research-assistant'
+import { Route as AuthenticatedSavedRouteImport } from './routes/_authenticated/saved'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 
-const IndexRoute = IndexRouteImport.update({
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const ChatRoute = ChatRouteImport.update({
+const AuthenticatedChatRoute = AuthenticatedChatRouteImport.update({
   id: '/chat',
   path: '/chat',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const MeetingAssistantRoute = MeetingAssistantRouteImport.update({
-  id: '/meeting-assistant',
-  path: '/meeting-assistant',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResearchAssistantRoute = ResearchAssistantRouteImport.update({
-  id: '/research-assistant',
-  path: '/research-assistant',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SavedRoute = SavedRouteImport.update({
+const AuthenticatedMeetingAssistantRoute =
+  AuthenticatedMeetingAssistantRouteImport.update({
+    id: '/meeting-assistant',
+    path: '/meeting-assistant',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedResearchAssistantRoute =
+  AuthenticatedResearchAssistantRouteImport.update({
+    id: '/research-assistant',
+    path: '/research-assistant',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedSavedRoute = AuthenticatedSavedRouteImport.update({
   id: '/saved',
   path: '/saved',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const SettingsRoute = SettingsRouteImport.update({
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
   id: '/settings',
   path: '/settings',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/chat': typeof ChatRoute
-  '/meeting-assistant': typeof MeetingAssistantRoute
-  '/research-assistant': typeof ResearchAssistantRoute
-  '/saved': typeof SavedRoute
-  '/settings': typeof SettingsRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/chat': typeof AuthenticatedChatRoute
+  '/meeting-assistant': typeof AuthenticatedMeetingAssistantRoute
+  '/research-assistant': typeof AuthenticatedResearchAssistantRoute
+  '/saved': typeof AuthenticatedSavedRoute
+  '/settings': typeof AuthenticatedSettingsRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/chat': typeof ChatRoute
-  '/meeting-assistant': typeof MeetingAssistantRoute
-  '/research-assistant': typeof ResearchAssistantRoute
-  '/saved': typeof SavedRoute
-  '/settings': typeof SettingsRoute
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/chat': typeof AuthenticatedChatRoute
+  '/meeting-assistant': typeof AuthenticatedMeetingAssistantRoute
+  '/research-assistant': typeof AuthenticatedResearchAssistantRoute
+  '/saved': typeof AuthenticatedSavedRoute
+  '/settings': typeof AuthenticatedSettingsRoute
+  '/': typeof AuthenticatedIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/chat': typeof ChatRoute
-  '/meeting-assistant': typeof MeetingAssistantRoute
-  '/research-assistant': typeof ResearchAssistantRoute
-  '/saved': typeof SavedRoute
-  '/settings': typeof SettingsRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/_authenticated/chat': typeof AuthenticatedChatRoute
+  '/_authenticated/meeting-assistant': typeof AuthenticatedMeetingAssistantRoute
+  '/_authenticated/research-assistant': typeof AuthenticatedResearchAssistantRoute
+  '/_authenticated/saved': typeof AuthenticatedSavedRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
+  '/_authenticated/': typeof AuthenticatedIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
+    | '/reset-password'
     | '/chat'
     | '/meeting-assistant'
     | '/research-assistant'
@@ -83,85 +111,126 @@ export interface FileRouteTypes {
     | '/settings'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
+    | '/auth'
+    | '/reset-password'
     | '/chat'
     | '/meeting-assistant'
     | '/research-assistant'
     | '/saved'
     | '/settings'
+    | '/'
   id:
     | '__root__'
-    | '/'
-    | '/chat'
-    | '/meeting-assistant'
-    | '/research-assistant'
-    | '/saved'
-    | '/settings'
+    | '/_authenticated'
+    | '/auth'
+    | '/reset-password'
+    | '/_authenticated/chat'
+    | '/_authenticated/meeting-assistant'
+    | '/_authenticated/research-assistant'
+    | '/_authenticated/saved'
+    | '/_authenticated/settings'
+    | '/_authenticated/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  ChatRoute: typeof ChatRoute
-  MeetingAssistantRoute: typeof MeetingAssistantRoute
-  ResearchAssistantRoute: typeof ResearchAssistantRoute
-  SavedRoute: typeof SavedRoute
-  SettingsRoute: typeof SettingsRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/': {
+      id: '/_authenticated/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/chat': {
-      id: '/chat'
+    '/_authenticated/chat': {
+      id: '/_authenticated/chat'
       path: '/chat'
       fullPath: '/chat'
-      preLoaderRoute: typeof ChatRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedChatRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/meeting-assistant': {
-      id: '/meeting-assistant'
+    '/_authenticated/meeting-assistant': {
+      id: '/_authenticated/meeting-assistant'
       path: '/meeting-assistant'
       fullPath: '/meeting-assistant'
-      preLoaderRoute: typeof MeetingAssistantRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedMeetingAssistantRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/research-assistant': {
-      id: '/research-assistant'
+    '/_authenticated/research-assistant': {
+      id: '/_authenticated/research-assistant'
       path: '/research-assistant'
       fullPath: '/research-assistant'
-      preLoaderRoute: typeof ResearchAssistantRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedResearchAssistantRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/saved': {
-      id: '/saved'
+    '/_authenticated/saved': {
+      id: '/_authenticated/saved'
       path: '/saved'
       fullPath: '/saved'
-      preLoaderRoute: typeof SavedRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedSavedRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/settings': {
-      id: '/settings'
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
       path: '/settings'
       fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedChatRoute: typeof AuthenticatedChatRoute
+  AuthenticatedMeetingAssistantRoute: typeof AuthenticatedMeetingAssistantRoute
+  AuthenticatedResearchAssistantRoute: typeof AuthenticatedResearchAssistantRoute
+  AuthenticatedSavedRoute: typeof AuthenticatedSavedRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedChatRoute: AuthenticatedChatRoute,
+  AuthenticatedMeetingAssistantRoute: AuthenticatedMeetingAssistantRoute,
+  AuthenticatedResearchAssistantRoute: AuthenticatedResearchAssistantRoute,
+  AuthenticatedSavedRoute: AuthenticatedSavedRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  ChatRoute: ChatRoute,
-  MeetingAssistantRoute: MeetingAssistantRoute,
-  ResearchAssistantRoute: ResearchAssistantRoute,
-  SavedRoute: SavedRoute,
-  SettingsRoute: SettingsRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
