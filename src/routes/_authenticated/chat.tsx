@@ -11,7 +11,7 @@ const examplePrompts = [
   "Draft a professional email",
 ];
 
-export const Route = createFileRoute("/chat")({
+export const Route = createFileRoute("/_authenticated/chat")({
   head: () => ({
     meta: [
       { title: "AI Chat — Smart Office Assistant" },

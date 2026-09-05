@@ -6,7 +6,7 @@ import { EmptyState } from "@/components/app/EmptyState";
 import { FileUploadArea } from "@/components/app/FileUploadArea";
 import { AppButton, AppTextarea } from "@/components/ui/field-controls";
 
-export const Route = createFileRoute("/meeting-assistant")({
+export const Route = createFileRoute("/_authenticated/meeting-assistant")({
   head: () => ({
     meta: [
       { title: "Meeting Assistant — Smart Office Assistant" },

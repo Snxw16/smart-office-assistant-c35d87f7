@@ -10,7 +10,7 @@ import {
   LabeledField,
 } from "@/components/ui/field-controls";
 
-export const Route = createFileRoute("/research-assistant")({
+export const Route = createFileRoute("/_authenticated/research-assistant")({
   head: () => ({
     meta: [
       { title: "Research Assistant — Smart Office Assistant" },
