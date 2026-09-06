@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
+import { useCurrentUser, useRefreshCurrentUser, initials } from "@/hooks/use-profile";
 import { PageHeader } from "@/components/app/PageHeader";
 import { GlassPanel } from "@/components/app/GlassPanel";
 import {
@@ -59,6 +61,34 @@ function SettingsPage() {
   const [productNotifications, setProductNotifications] = useState(false);
   const [theme, setTheme] = useState("Light");
 
+  const { data: user } = useCurrentUser();
+  const refreshUser = useRefreshCurrentUser();
+  const [name, setName] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [status, setStatus] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (user) setName(user.fullName);
+  }, [user]);
+
+  async function saveProfile() {
+    if (!user) return;
+    setSaving(true);
+    setStatus(null);
+    const { error } = await supabase
+      .from("profiles")
+      .update({ full_name: name })
+      .eq("id", user.id);
+    setSaving(false);
+    if (error) {
+      setStatus(error.message);
+      return;
+    }
+    setStatus("Profile saved.");
+    refreshUser();
+  }
+
+
   return (
     <section>
       <PageHeader
@@ -72,16 +102,22 @@ function SettingsPage() {
           <h2 className="text-sm font-semibold">Profile</h2>
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">
             <div className="grid size-12 shrink-0 place-items-center rounded-full bg-linear-to-br from-coral to-plum text-sm font-semibold text-primary-foreground">
-              AR
+              {user ? initials(user.fullName, user.email) : ""}
             </div>
             <div className="grid flex-1 gap-3 sm:grid-cols-2">
               <LabeledField label="Name">
-                <AppInput defaultValue="Alex Rivera" />
+                <AppInput value={name} onChange={(e) => setName(e.target.value)} />
               </LabeledField>
               <LabeledField label="Email">
-                <AppInput defaultValue="alex@smartoffice.app" type="email" />
+                <AppInput value={user?.email ?? ""} type="email" readOnly disabled />
               </LabeledField>
             </div>
+          </div>
+          <div className="mt-4 flex items-center gap-3">
+            <AppButton onClick={saveProfile} disabled={saving || !user}>
+              {saving ? "Saving…" : "Save changes"}
+            </AppButton>
+            {status ? <span className="text-sm text-foreground/60">{status}</span> : null}
           </div>
         </GlassPanel>
 
