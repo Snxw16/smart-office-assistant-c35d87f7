@@ -102,16 +102,22 @@ function SettingsPage() {
           <h2 className="text-sm font-semibold">Profile</h2>
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-center">
             <div className="grid size-12 shrink-0 place-items-center rounded-full bg-linear-to-br from-coral to-plum text-sm font-semibold text-primary-foreground">
-              AR
+              {user ? initials(user.fullName, user.email) : ""}
             </div>
             <div className="grid flex-1 gap-3 sm:grid-cols-2">
               <LabeledField label="Name">
-                <AppInput defaultValue="Alex Rivera" />
+                <AppInput value={name} onChange={(e) => setName(e.target.value)} />
               </LabeledField>
               <LabeledField label="Email">
-                <AppInput defaultValue="alex@smartoffice.app" type="email" />
+                <AppInput value={user?.email ?? ""} type="email" readOnly disabled />
               </LabeledField>
             </div>
+          </div>
+          <div className="mt-4 flex items-center gap-3">
+            <AppButton onClick={saveProfile} disabled={saving || !user}>
+              {saving ? "Saving…" : "Save changes"}
+            </AppButton>
+            {status ? <span className="text-sm text-foreground/60">{status}</span> : null}
           </div>
         </GlassPanel>
 
