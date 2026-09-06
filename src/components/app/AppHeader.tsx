@@ -21,9 +21,7 @@ export function AppHeader({ onOpenNav }: { onOpenNav: () => void }) {
 
       <div className="ml-auto flex items-center gap-2">
         <AppButton className="hidden sm:inline-flex">New</AppButton>
-        <div className="grid size-9 shrink-0 place-items-center rounded-full border-2 border-glass bg-plum/70 text-xs font-semibold text-foreground shadow-sm">
-          AR
-        </div>
+        <UserMenu />
       </div>
     </header>
   );

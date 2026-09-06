@@ -43,12 +43,22 @@ function SidebarBody({ onNavigate }: { onNavigate?: () => void }) {
       <div className="px-3 pb-5">
         <div className="flex items-center gap-3 rounded-[12px] border border-glass/70 bg-glass/45 p-2.5">
           <div className="grid size-9 shrink-0 place-items-center rounded-full bg-linear-to-br from-sky to-plum text-xs font-semibold text-primary-foreground">
-            AR
+            {user ? initials(user.fullName, user.email) : ""}
           </div>
           <div className="min-w-0 leading-tight">
-            <div className="truncate text-[13px] font-semibold">Alex Rivera</div>
-            <div className="truncate text-xs text-foreground/50">alex@smartoffice.app</div>
+            <div className="truncate text-[13px] font-semibold">
+              {user?.fullName || user?.email || "Loading…"}
+            </div>
+            <div className="truncate text-xs text-foreground/50">{user?.email ?? ""}</div>
           </div>
+          <button
+            type="button"
+            aria-label="Sign out"
+            onClick={() => void signOut()}
+            className="ml-auto grid size-8 shrink-0 place-items-center rounded-[9px] text-foreground/55 transition-colors hover:bg-glass/70 hover:text-foreground"
+          >
+            <LogOut className="size-4" />
+          </button>
         </div>
       </div>
     </>
