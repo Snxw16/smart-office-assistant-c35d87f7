@@ -1,10 +1,14 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { X } from "lucide-react";
+import { LogOut, X } from "lucide-react";
 import { navItems } from "./nav-items";
 import { cn } from "@/lib/utils";
+import { useCurrentUser, initials } from "@/hooks/use-profile";
+import { useSignOut } from "./UserMenu";
 
 function SidebarBody({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { data: user } = useCurrentUser();
+  const signOut = useSignOut();
 
   return (
     <>
