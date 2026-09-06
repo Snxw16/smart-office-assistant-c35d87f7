@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
+import { supabase } from "@/integrations/supabase/client";
+import { useCurrentUser, useRefreshCurrentUser, initials } from "@/hooks/use-profile";
 import { PageHeader } from "@/components/app/PageHeader";
 import { GlassPanel } from "@/components/app/GlassPanel";
 import {
@@ -58,6 +60,34 @@ function SettingsPage() {
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [productNotifications, setProductNotifications] = useState(false);
   const [theme, setTheme] = useState("Light");
+
+  const { data: user } = useCurrentUser();
+  const refreshUser = useRefreshCurrentUser();
+  const [name, setName] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [status, setStatus] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (user) setName(user.fullName);
+  }, [user]);
+
+  async function saveProfile() {
+    if (!user) return;
+    setSaving(true);
+    setStatus(null);
+    const { error } = await supabase
+      .from("profiles")
+      .update({ full_name: name })
+      .eq("id", user.id);
+    setSaving(false);
+    if (error) {
+      setStatus(error.message);
+      return;
+    }
+    setStatus("Profile saved.");
+    refreshUser();
+  }
+
 
   return (
     <section>
