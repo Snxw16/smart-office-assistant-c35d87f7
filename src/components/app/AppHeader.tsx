@@ -1,5 +1,6 @@
 import { Menu } from "lucide-react";
 import { SearchField, AppButton } from "@/components/ui/field-controls";
+import { UserMenu } from "./UserMenu";
 
 export function AppHeader({ onOpenNav }: { onOpenNav: () => void }) {
   return (
